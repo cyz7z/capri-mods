@@ -41,6 +41,7 @@ public class M : ICapriMod
         t.Tick += OnTick;
         t.Start();
         c.Log("Float: running.");
+        lastAnchor = Anchor();
     }
 
     private double Now()
@@ -62,6 +63,7 @@ public class M : ICapriMod
     private void OnTick(object sender, EventArgs e)
     {
         if (companion == null) return;
+        if (c.Her.Dragging) { gliding = false; lastAnchor = Anchor(); return; }
         Point cur = Anchor();
         if (!gliding)
         {
